@@ -1,0 +1,121 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Memory Match Game</title>  
+    <style>  
+        body {  
+            font-family: Arial, sans-serif;  
+        }  
+        .game-board {  
+            display: grid;  
+            grid-template-columns: repeat(4, 100px);  
+            gap: 10px;  
+        }  
+        .card {  
+            width: 100px;  
+            height: 100px;  
+            background-color: #ccc;  
+            display: flex;  
+            align-items: center;  
+            justify-content: center;  
+            font-size: 2em;  
+            cursor: pointer;  
+        }  
+        .matched {  
+            background-color: #aaf;  
+        }  
+        .hidden {  
+            background-color: #ddd;  
+        }  
+        #score {  
+            margin: 20px 0;  
+        }  
+    </style>  
+</head>  
+<body>  
+    <h1>Memory Match Game</h1>  
+    <div id="score">Moves: 0</div>  
+    <div class="game-board"></div>  
+    <div id="victory-message" style="display:none;"></div>  
+    <script>  
+        const cards = [  
+            'A', 'A',  
+            'B', 'B',  
+            'C', 'C',  
+            'D', 'D',  
+            'E', 'E',  
+            'F', 'F',  
+            'G', 'G',  
+            'H', 'H'  
+        ];  
+        let moves = 0;  
+        let firstCard = null;  
+        let secondCard = null;  
+        const board = document.querySelector('.game-board');  
+        const scoreDisplay = document.getElementById('score');  
+        const victoryMessage = document.getElementById('victory-message');  
+  
+        function shuffle(array) {  
+            array.sort(() => Math.random() - 0.5);  
+        }  
+  
+        function createBoard() {  
+            shuffle(cards);  
+            cards.forEach(card => {  
+                const cardElement = document.createElement('div');  
+                cardElement.classList.add('card', 'hidden');  
+                cardElement.setAttribute('data-card', card);  
+                cardElement.addEventListener('click', flipCard);  
+                board.appendChild(cardElement);  
+            });  
+        }  
+  
+        function flipCard() {  
+            if (firstCard && secondCard) return;  
+            this.classList.remove('hidden');  
+            this.innerText = this.getAttribute('data-card');  
+  
+            if (!firstCard) {  
+                firstCard = this;  
+            } else {  
+                secondCard = this;  
+                moves++;  
+                scoreDisplay.innerText = 'Moves: ' + moves;  
+                checkForMatch();  
+            }  
+        }  
+  
+        function checkForMatch() {  
+            if (firstCard.innerText === secondCard.innerText) {  
+                firstCard.classList.add('matched');  
+                secondCard.classList.add('matched');  
+                resetCards();  
+                checkVictory();  
+            } else {  
+                setTimeout(() => {  
+                    firstCard.classList.add('hidden');  
+                    secondCard.classList.add('hidden');  
+                    resetCards();  
+                }, 1000);  
+            }  
+        }  
+  
+        function resetCards() {  
+            firstCard = null;  
+            secondCard = null;  
+        }  
+  
+        function checkVictory() {  
+            const matchedCards = document.querySelectorAll('.matched');  
+            if (matchedCards.length === cards.length) {  
+                victoryMessage.innerText = 'Congratulations! You won in ' + moves + ' moves!';  
+                victoryMessage.style.display = 'block';  
+            }  
+        }  
+  
+        createBoard();  
+    </script>  
+</body>  
+</html>  
