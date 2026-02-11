@@ -3,26 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minigames</title>
+    <title>Mini Games</title>
+    <style>
+        body {
+            height: 100vh;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .game-card {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: #f0f0f0;
+            text-decoration: none;
+            color: black;
+            transition: background-color 0.3s;
+        }
+        .game-card:hover {
+            background-color: #e0e0e0;
+        }
+        .game-card span {
+            font-size: 2em;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="tic-tac-toe.html">Tic Tac Toe</a></li>
-                <li><a href="rock-paper-scissors.html">Rock Paper Scissors</a></li>
-                <li><a href="memory-game.html">Memory Game</a></li>
-                <li><a href="number-guesser.html">Number Guesser</a></li>
-                <li><a href="computer-science-quiz.html">Computer Science Quiz</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <h1>Welcome to Minigames</h1>
-        <p>Select a game from the navigation links above.</p>
-    </main>
-    <footer>
-        <p>&copy; 2026 Minigames</p>
-    </footer>
+    <div class="container">
+        <h1>Welcome to Mini Games</h1>
+        <div>
+            <a class="game-card" href="games/game1.html">
+                <span>🎮 Game 1</span>
+            </a>
+            <a class="game-card" href="games/game2.html">
+                <span>🧩 Game 2</span>
+            </a>
+            <a class="game-card" href="games/game3.html">
+                <span>🚀 Game 3</span>
+            </a>
+        </div>
+    </div>
 </body>
 </html>
